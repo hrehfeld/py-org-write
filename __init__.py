@@ -25,8 +25,39 @@ def paren(x, s='(', e=')'):
 def brackets(x):
     return paren(x, '[', ']')
 
+def chevrons(x):
+    return paren(x, '<', '>')
+
+def strong(x):
+    return paren(x, '*')
+
+def em(x):
+    return paren(x, '/', '/')
+
+def code(x):
+    return paren(x, '=', '=')
+
+def var(x):
+    return paren(x, '~', '~')
+
+def para(x):
+    return paren(x, '\n\n')
+
+def link(url, text=None):
+    inner = brackets(url)
+    if text is not None:
+        inner += brackets(text)
+    return brackets(inner)
+
+
 def inactive_date(date):
     return brackets(date)
+
+def active_date(date):
+    return chevrons(date)
+
+def date_range(a, b):
+    return '%s--%s' % (a, b)
 
 def state_change(state, time):
     return '- %s %s' % (state, inactive_date(date(time)))
